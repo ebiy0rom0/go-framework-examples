@@ -3,7 +3,7 @@ package infra
 import (
 	"context"
 	"database/sql"
-	"examples/repository"
+	"examples/interface/repository"
 )
 
 type sqlHandler struct {
