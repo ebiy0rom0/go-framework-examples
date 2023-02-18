@@ -13,7 +13,7 @@ func NewUserRepository(handler SqlHandler) *userRepository {
 	return &userRepository{handler}
 }
 
-func (r *userRepository) GetByID(ctx context.Context, userID int) (*model.User, error) {
+func (r *userRepository) GetUserByID(ctx context.Context, userID int) (*model.User, error) {
 	query := "SELECT * FROM user WHERE user_id = ?"
 	row, err := r.QueryRow(ctx, query, userID)
 	if err != nil {
@@ -21,10 +21,24 @@ func (r *userRepository) GetByID(ctx context.Context, userID int) (*model.User, 
 	}
 
 	var user *model.User
-	if err := row.Scan(&user.UserID, &user.Name, &user.Authority, &user.Password); err != nil {
+	if err := row.Scan(&user.UserID, &user.Name, &user.Authority); err != nil {
 		return nil, err
 	}
 	return user, nil
+}
+
+func (r *userRepository) GetLoginByID(ctx context.Context, loginID string) (*model.Login, error) {
+	query := "SELECT * FROM login WHERE login_id = ?"
+	row, err := r.QueryRow(ctx, query, loginID)
+	if err != nil {
+		return nil, err
+	}
+
+	var login *model.Login
+	if err := row.Scan(&login.LoginID, &login.UserID, &login.Password); err != nil {
+		return nil, err
+	}
+	return login, nil
 }
 
 func (r *userRepository) ModifyAuthority(ctx context.Context, userID, authority int) error {

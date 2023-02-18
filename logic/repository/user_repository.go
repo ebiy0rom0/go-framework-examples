@@ -6,6 +6,7 @@ import (
 )
 
 type UserRepository interface {
-	GetByID(ctx context.Context, userID int) (*model.User, error)
+	GetUserByID(ctx context.Context, userID int) (*model.User, error)
+	GetLoginByID(ctx context.Context, loginID string) (*model.Login, error)
 	ModifyAuthority(ctx context.Context, userID, authority int) error
 }
