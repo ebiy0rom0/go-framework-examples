@@ -3,6 +3,7 @@ package main
 import (
 	"examples/framework"
 	"examples/infra"
+	_ "examples/infra/middleware"
 	"flag"
 	"fmt"
 )

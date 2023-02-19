@@ -6,6 +6,7 @@ require (
 	github.com/gin-gonic/gin v1.8.2
 	github.com/labstack/echo v3.3.10+incompatible
 	github.com/mattn/go-sqlite3 v1.14.16
+	github.com/rs/zerolog v1.29.0
 	github.com/tanimutomo/sqlfile v1.0.0
 )
 
