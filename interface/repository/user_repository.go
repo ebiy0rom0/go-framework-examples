@@ -2,6 +2,7 @@ package repository
 
 import (
 	"context"
+	"examples/logic/repository"
 	"examples/model"
 )
 
@@ -27,6 +28,28 @@ func (r *userRepository) GetUserByID(ctx context.Context, userID int) (*model.Us
 	return user, nil
 }
 
+func (r *userRepository) GetAllUsers(ctx context.Context) ([]model.User, error) {
+	query := "SELECT * FROM user"
+	rows, err := r.Query(ctx, query)
+	if err != nil {
+		return nil, err
+	}
+
+	var users []model.User
+	for rows.Next() {
+		var user model.User
+		if err := rows.Scan(
+			&user.UserID,
+			&user.Name,
+			&user.Authority,
+		); err != nil {
+			return nil, err
+		}
+		users = append(users, user)
+	}
+	return users, nil
+}
+
 func (r *userRepository) GetLoginByID(ctx context.Context, loginID string) (*model.Login, error) {
 	query := "SELECT * FROM login WHERE login_id = ?"
 	row, err := r.QueryRow(ctx, query, loginID)
@@ -48,3 +71,5 @@ func (r *userRepository) ModifyAuthority(ctx context.Context, userID, authority 
 	}
 	return nil
 }
+
+var _ repository.UserRepository = (*userRepository)(nil)
