@@ -4,10 +4,13 @@ go 1.18
 
 require (
 	github.com/gin-gonic/gin v1.8.2
+	github.com/gorilla/mux v1.8.0
 	github.com/labstack/echo v3.3.10+incompatible
 	github.com/mattn/go-sqlite3 v1.14.16
 	github.com/rs/zerolog v1.29.0
+	github.com/sony/sonyflake v1.1.0
 	github.com/tanimutomo/sqlfile v1.0.0
+	golang.org/x/crypto v0.6.0
 )
 
 require (
@@ -25,11 +28,9 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.6 // indirect
-	github.com/sony/sonyflake v1.1.0 // indirect
 	github.com/ugorji/go/codec v1.2.9 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasttemplate v1.2.2 // indirect
-	golang.org/x/crypto v0.6.0 // indirect
 	golang.org/x/net v0.7.0 // indirect
 	golang.org/x/sys v0.5.0 // indirect
 	golang.org/x/text v0.7.0 // indirect
