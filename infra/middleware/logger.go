@@ -10,10 +10,10 @@ import (
 
 var logger zerolog.Logger
 
-func WithLogger(next http.HandlerFunc) http.HandlerFunc {
+func WithLogger(next http.Handler) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		writer := infra.NewResponseWriter(w, r)
-		next(writer, r)
+		next.ServeHTTP(writer, r)
 
 		logger.Info().Object("accesslog", writer).Send()
 	}

@@ -13,13 +13,13 @@ const HEADER_AUTHORIZATION = "Authorization"
 var flaker *sonyflake.Sonyflake
 var session map[string]int
 
-func CheckToken(next http.HandlerFunc) http.HandlerFunc {
+func CheckToken(next http.Handler) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		token := r.Header.Get(HEADER_AUTHORIZATION)
 		if len(token) == 0 {
-			next = unauthorized
+			next = http.HandlerFunc(unauthorized)
 		}
-		next(w, r)
+		next.ServeHTTP(w, r)
 	}
 }
 
