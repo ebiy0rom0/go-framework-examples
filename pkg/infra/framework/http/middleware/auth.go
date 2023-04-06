@@ -11,7 +11,6 @@ import (
 	"examples/pkg/util"
 	"fmt"
 	"net/http"
-	"os"
 	"strings"
 )
 
@@ -53,9 +52,7 @@ func (m *AuthMiddleware) WithCheckToken(next http.Handler) http.HandlerFunc {
 }
 
 func warnLog(ctx context.Context, err error) {
-	if err := logger.L.Warn(ctx, fmt.Sprint(err)); err != nil {
-		fmt.Fprintln(os.Stderr, err)
-	}
+	logger.L.Warn(fmt.Sprint(err))
 }
 
 func unauthorized(w http.ResponseWriter) {
